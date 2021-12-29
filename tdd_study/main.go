@@ -1,12 +1,23 @@
 package main
 
-import "sort"
+import (
+	"math"
+	"sort"
+)
 
 var personFatrate = map[string]float64{}
 
-func inputInfo(name string, fatRate float64) {
+func inputInfo(name string, fatRate ...float64) {
+	//不定长参数传入的是一个数组或者是一个切片，就选择最佳体脂传入
+	minFatRate := math.MaxFloat64
+	for _, item := range fatRate {
+		if minFatRate > item { //只要比当前小就选一个更小的值
+			minFatRate = item
+		}
+	}
 	//先用键值对进行实例化，把姓名和值录入
-	personFatrate[name] = fatRate
+
+	personFatrate[name] = minFatRate
 }
 
 func getRank(name string) (rank int, fatRate float64) {

@@ -17,7 +17,7 @@ func TestCase1(t *testing.T) {
 			t.Fatalf("预期王强第一，但是得到的是%d", rankOfWQ)
 		}
 		if fatRateOfWQ != 0.32 {
-			t.Fatalf("预期王强的体脂是0.32，但是得到的是%d", rankOfWQ)
+			t.Fatalf("预期王强的体脂是0.32，但是得到的是%f", fatRateOfWQ)
 		}
 	}
 	//• 李静录入他的体脂 28
@@ -30,16 +30,16 @@ func TestCase1(t *testing.T) {
 			t.Fatalf("预期王强第二，但是得到的是%d", rankOfWQ)
 		}
 		if fatRateOfWQ != 0.32 {
-			t.Fatalf("预期王强的体脂是0.32，但是得到的是%d", rankOfWQ)
+			t.Fatalf("预期王强的体脂是0.32，但是得到的是%f", fatRateOfWQ)
 		}
 	}
 	{
 		rankOfLJ, fatRateOfLJ := getRank("李静")
 		if rankOfLJ != 1 {
-			t.Fatalf("预期李静第一，但是得到的是%d", rankOfLJ)
+			t.Fatalf("预期李静第一，但是得到的是:%d", rankOfLJ)
 		}
 		if fatRateOfLJ != 0.28 {
-			t.Fatalf("预期李静的体脂是0.28，但是得到的是%d", rankOfLJ)
+			t.Fatalf("预期李静的体脂是0.28，但是得到的是:%f", fatRateOfLJ)
 		}
 	}
 }
@@ -56,19 +56,19 @@ func TestCase2(t *testing.T) {
 	{
 		rankOFWQ, fatRateOFWQ := getRank("王强")
 		if rankOFWQ != 2 {
-			t.Fatalf("预期王强是第二，但得到的是%d", rankOFWQ)
+			t.Fatalf("预期王强是第二，但得到的是:%d", rankOFWQ)
 		}
 		if fatRateOFWQ != 0.38 {
-			t.Fatalf("预期王强的体脂率是0.38，但得到的是%d", fatRateOFWQ)
+			t.Fatalf("预期王强的体脂率是0.38，但得到的是:%f", fatRateOFWQ)
 		}
 	}
 	{
 		rankOFZW, fatRateOFZW := getRank("张伟")
 		if rankOFZW != 2 {
-			t.Fatalf("预期张伟是第二，但得到的是%d", rankOFZW)
+			t.Fatalf("预期张伟是第二，但得到的是:%d", rankOFZW)
 		}
 		if fatRateOFZW != 0.38 {
-			t.Fatalf("预期张伟的体脂率是0.38，但得到的是%d", fatRateOFZW)
+			t.Fatalf("预期张伟的体脂率是0.38，但得到的是:%f", fatRateOFZW)
 		}
 	}
 	{
@@ -77,12 +77,45 @@ func TestCase2(t *testing.T) {
 			t.Fatalf("预期李静是第一，但得到的是%d", rankOFLJ)
 		}
 		if fatRateOFLJ != 0.28 {
-			t.Fatalf("预期李静的体脂率是0.28，但得到的是%d", fatRateOFLJ)
+			t.Fatalf("预期李静的体脂率是0.28，但得到的是%f", fatRateOFLJ)
 		}
 	}
 
 }
 
 func TestCase3(t *testing.T) {
+	//• 王强录入体脂是 38
+	//• 李静录入体脂是 28
+	//• 张伟注册成功，未录入体脂
+	//• 李静排名第一，体脂 28；王强排名第二，体脂 38；张伟排名第三，没有体脂记录。
+	inputInfo("王强", 0.38)
+	//录入项可选，使用变长参数
+	inputInfo("张伟") //• 张伟注册成功，未录入体脂
+	inputInfo("李静", 0.28)
+
+	{
+		rankOFWQ, fatRateOFWQ := getRank("王强")
+		if rankOFWQ != 2 {
+			t.Fatalf("预期王强是第二，但得到的是:%d", rankOFWQ)
+		}
+		if fatRateOFWQ != 0.38 {
+			t.Fatalf("预期王强的体脂率是0.38，但得到的是:%f", fatRateOFWQ)
+		}
+	}
+	{ //张伟没有输入体脂信息，所以我们不关心fatarate
+		rankOFZW, _ := getRank("张伟")
+		if rankOFZW != 3 {
+			t.Fatalf("预期张伟是第三，但得到的是:%d", rankOFZW)
+		}
+	}
+	{
+		rankOFLJ, fatRateOFLJ := getRank("李静")
+		if rankOFLJ != 1 {
+			t.Fatalf("预期李静是第一，但得到的是%d", rankOFLJ)
+		}
+		if fatRateOFLJ != 0.28 {
+			t.Fatalf("预期李静的体脂率是0.28，但得到的是%f", fatRateOFLJ)
+		}
+	}
 
 }

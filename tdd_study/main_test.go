@@ -45,6 +45,41 @@ func TestCase1(t *testing.T) {
 }
 
 func TestCase2(t *testing.T) {
+	//• 王强录入体脂是 38
+	//• 张伟录入体脂是 38
+	//• 李静录入体脂是 28
+	//• 李静排名第一，体脂 28；王强、张伟排名第二，体脂 38。
+	inputInfo("王强", 0.38)
+	inputInfo("张伟", 0.38)
+	inputInfo("李静", 0.28)
+
+	{
+		rankOFWQ, fatRateOFWQ := getRank("王强")
+		if rankOFWQ != 2 {
+			t.Fatalf("预期王强是第二，但得到的是%d", rankOFWQ)
+		}
+		if fatRateOFWQ != 0.38 {
+			t.Fatalf("预期王强的体脂率是0.38，但得到的是%d", fatRateOFWQ)
+		}
+	}
+	{
+		rankOFZW, fatRateOFZW := getRank("张伟")
+		if rankOFZW != 2 {
+			t.Fatalf("预期张伟是第二，但得到的是%d", rankOFZW)
+		}
+		if fatRateOFZW != 0.38 {
+			t.Fatalf("预期张伟的体脂率是0.38，但得到的是%d", fatRateOFZW)
+		}
+	}
+	{
+		rankOFLJ, fatRateOFLJ := getRank("李静")
+		if rankOFLJ != 1 {
+			t.Fatalf("预期李静是第一，但得到的是%d", rankOFLJ)
+		}
+		if fatRateOFLJ != 0.28 {
+			t.Fatalf("预期李静的体脂率是0.28，但得到的是%d", fatRateOFLJ)
+		}
+	}
 
 }
 

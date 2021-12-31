@@ -30,7 +30,7 @@ func main() {
 		//录入信息
 		weight, height, age, sex := getFromInput()
 		//计算体脂率
-		fatRate := calculateFatRate(bmi, age, sexWeight, weight, height)
+		calculateFatRate(bmi, age, sexWeight, weight, height)
 		//给出建议
 		checkHealthAndGetSuggestion(sex, age, fatRate)
 		//计算平均值

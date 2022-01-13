@@ -92,7 +92,8 @@ func NewElevatorDefault(id string, floorNumber int) *Elevator {
 	//elevator.id = id
 	//elevator.floorNumber = floorNumber
 	// 设置默认值
-	//elevator.currentFloorNumber = 1 // 默认楼层 1
+	//elevator.currentFloorNumber = 1
+	//默认楼层 1
 	elevator := NewElevatorCurrent(id, floorNumber, 1)
 	return elevator
 }

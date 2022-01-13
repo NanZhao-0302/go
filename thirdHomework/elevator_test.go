@@ -33,7 +33,6 @@ func TestCase3RunElevator(t *testing.T) {
 
 // 测试案例 4
 // 楼层有 5 层, 电梯在 3 层. 上来一些人后, 目标楼层: 4 楼, 5 楼, 2 楼. 电梯先向上到 4 楼, 然后到 5 楼, 之后转头到 2楼, 最后停在 2楼
-//
 func TestCase4RunElevator(t *testing.T) {
 	elevator := NewElevatorCurrent("Elevator4", 5, 3)
 	elevator.RunTarget(4)

@@ -56,7 +56,6 @@ func Run(elevator Elevator) {
 
 // RunTarget
 // 无法解决 依次去往多个目标
-//
 func (elevator *Elevator) RunTarget(target int) {
 	fmt.Println(elevator.currentFloorInfo(), "    电梯运行去往", target, " 楼层")
 	if target >= 1 && target <= elevator.floorNumber {
